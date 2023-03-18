@@ -28,6 +28,7 @@ struct Match{
     Team team2;
     int goal1;
     int goal2;
+    int round;
 };
 
 typedef vector<Player> players;
