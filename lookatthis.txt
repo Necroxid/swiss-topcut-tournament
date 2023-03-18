@@ -1,0 +1,131 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+struct Team {
+    string name;
+    int wins;
+    int goals_scored;
+    int goals_conceded;
+    int differential;
+
+    Team(string n) {
+        name = n;
+        wins = 0;
+        goals_scored = 0;
+        goals_conceded = 0;
+        differential = 0;
+    }
+};
+
+vector<Team> teams;
+
+// returns true if team1 has a higher rank than team2
+bool compare_teams(Team team1, Team team2) {
+    if (team1.wins != team2.wins) {
+        return team1.wins > team2.wins;
+    } else if (team1.differential != team2.differential) {
+        return team1.differential > team2.differential;
+    } else {
+        return team1.goals_scored > team2.goals_scored;
+    }
+}
+
+void generate_matches(vector<Team>& teams, vector<pair<Team, Team>>& matches) {
+    random_shuffle(teams.begin(), teams.end());
+
+    int num_teams = teams.size();
+    int num_rounds = ceil(log2(num_teams));
+
+    for (int i = 0; i < num_rounds; i++) {
+        int group_size = pow(2, i);
+        for (int j = 0; j < num_teams; j += 2 * group_size) {
+            for (int k = 0; k < group_size; k++) {
+                int index1 = j + k;
+                int index2 = j + group_size + k;
+                if (index2 >= num_teams) break;
+                matches.push_back(make_pair(teams[index1], teams[index2]));
+            }
+        }
+    }
+}
+
+int main() {
+    int num_teams;
+    cout << "Inserisci il numero di squadre che partecipano al torneo: ";
+    cin >> num_teams;
+
+    // create teams
+    for (int i = 0; i < num_teams; i++) {
+        string name;
+        cout << "Inserisci il nome della squadra " << i+1 << ": ";
+        cin >> name;
+        Team team(name);
+        teams.push_back(team);
+    }
+
+    // generate matches
+    vector<pair<Team, Team>> matches;
+    generate_matches(teams, matches);
+
+    // simulate matches
+    for (int i = 0; i < matches.size(); i++) {
+        Team& team1 = matches[i].first;
+        Team& team2 = matches[i].second;
+
+        int score1, score2;
+        cout << "Inserisci il punteggio di " << team1.name << ": ";
+        cin >> score1;
+        cout << "Inserisci il punteggio di " << team2.name << ": ";
+        cin >> score2;
+
+        if (score1 > score2) {
+            team1.wins++;
+        } else {
+            team2.wins++;
+        }
+
+        team1.goals_scored += score1;
+        team1.goals_conceded += score2;
+        team1.differential = team1.goals_scored - team1.goals_conceded;
+
+        team2.goals_scored += score2;
+        team2.goals_conceded += score1;
+        team2.differential = team2.goals_scored - team2.goals_conceded;
+    }
+
+    // Sort teams by number of wins and goal difference
+    sort(teams.begin(), teams.end(), [](const Team& a, const Team& b) {
+        if (a.wins != b.wins) {
+            return a.wins > b.wins;
+        }
+        return a.goalDifference > b.goalDifference;
+    });
+
+    // Determine cut-off point for next round
+    int cutOff = numTeams / 2;
+
+    // Check for ties at the cut-off point
+    int lastTeamWins = teams[cutOff - 1].wins;
+    int lastTeamDiff = teams[cutOff - 1].goalDifference;
+    int nextTeamWins = teams[cutOff].wins;
+    int nextTeamDiff = teams[cutOff].goalDifference;
+    if (lastTeamWins == nextTeamWins && lastTeamDiff == nextTeamDiff) {
+        // Find last team with same number of wins and goal difference
+        int lastIdx = cutOff - 2;
+        while (lastIdx >= 0 && teams[lastIdx].wins == lastTeamWins && teams[lastIdx].goalDifference == lastTeamDiff) {
+            lastIdx--;
+        }
+        cutOff = lastIdx + 1;
+    }
+
+    // Assign remaining teams to play each other in the next round
+    for (int i = cutOff; i < numTeams; i++) {
+        int j = i - cutOff;
+        Pairing pairing = { teams[i], teams[j] };
+        pairings.push_back(pairing);
+    }
+}
