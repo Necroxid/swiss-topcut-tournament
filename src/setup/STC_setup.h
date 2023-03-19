@@ -17,7 +17,15 @@ void buildTeams(players &_players, teams &_teams);
 
 int getNumPlayers();
 bool checkNumPlayers(players &_players);
-void shufflePlayers(players &_players);
-void shuffleTeams(teams &_teams);
+//void shufflePlayers(players &_players);
+//void shuffleTeams(teams &_teams);
+
+//shuffle da fare solo all'inizio
+template<typename Container>
+void shuffleContainer(Container &c)
+{
+    random_device rd;
+    shuffle(c.begin(), c.end(), rd);
+}
 
 #endif

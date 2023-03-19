@@ -12,9 +12,10 @@ void insertTeams(Team team, teams &_teams)
 
 void readPlayersFromFile(ifstream &ifs, players &_players)
 {
+    int i=0;
     while(!ifs.eof())
     {
-        string _name, _surname, _team_name = "BLANK";
+        string _name, _surname, _team_name = "Squadra"+to_string(i);
         int _age;
         ifs >> _name >> _surname >> _age;
         Player new_player;
@@ -23,6 +24,7 @@ void readPlayersFromFile(ifstream &ifs, players &_players)
         new_player.team_name = _team_name;
         new_player.age = _age;
         insertPlayers(new_player, _players);
+        i+=2;
     }
 }
 
@@ -30,7 +32,7 @@ void readPlayersFromFile(ifstream &ifs, players &_players)
 void buildTeams(players &_players, teams &_teams)
 {
     auto j=0;
-    for (auto i=0; i<_players.size(); i+=2)
+    for(auto i=0; i<_players.size(); i+=2)
     {   _teams[j].player1 = _players[i];
         _teams[j].player2 = _players[i+1];
         j++;
@@ -74,7 +76,7 @@ bool checkNumPlayers(players &_players)
     auto input_numplayers = getNumPlayers();
     return input_numplayers == _players.size() && input_numplayers == N_PLAYERS;
 }
-
+/*
 //shuffle da fare solo all'inizio
 void shufflePlayers(players &_players)
 {
@@ -87,3 +89,10 @@ void shuffleTeams(teams &_teams)
     random_device rd;
     shuffle(_teams.begin(), _teams.end(), rd);
 }
+
+template<typename Container>
+void shuffleContainer(Container &c)
+{
+    random_device rd;
+    shuffle(c.begin(), c.end(), rd);
+}*/
