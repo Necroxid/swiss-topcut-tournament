@@ -1,4 +1,4 @@
-0.1 Tutorial Github
+0.1 Tutorial Github ☑
 0.2 Tutorial CMake
 
 1. funzioni getter/setter per Player (nome_team) e Team (nome) + test
