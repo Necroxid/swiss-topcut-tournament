@@ -1,10 +1,10 @@
 #ifndef STC_DATA_H
 #define STC_DATA_H
 
+#include "globals/globals.h"
+
 #include <string>
 #include <vector>
-
-#include "globals/globals.h"
 
 using namespace std;
 

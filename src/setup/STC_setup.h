@@ -1,13 +1,12 @@
 #ifndef STC_SETUP_H
 #define STC_SETUP_H
 
+#include "../../include/STC_data.h"
+
 #include <fstream>
 #include <iostream>
-#include <cmath>
 #include <algorithm>
 #include <random>
-
-#include "../../include/STC_data.h"
 
 //Insert players on the list
 void insertPlayers(Player player, players &_players);

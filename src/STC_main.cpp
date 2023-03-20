@@ -16,6 +16,7 @@ int main()
     srand(time(NULL));
     players _players;
     
+    cout << N_PLAYERS << endl << N_TEAMS_SWISS << endl << N_ROUNDS_SWISS << endl;
 
 
 }
