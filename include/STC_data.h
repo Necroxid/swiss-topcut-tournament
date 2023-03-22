@@ -25,8 +25,9 @@ struct Team{
     int gd; //goal difference
 };
 
-//Match has the two teams battling each other, the goals made by them and the round the match is playing on
+//Match has the table the match is playing at, the two teams battling each other, the goals made by them and the round the match is playing on
 struct Match{
+    int table;
     Team team1;
     Team team2;
     int goal1;
