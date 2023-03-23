@@ -8,8 +8,6 @@
 #include <algorithm>
 #include <random>
 
-//set the number of rounds in Swiss
-int setNroundsSwiss(int n_players);
 //Reads the players information from a file
 void readPlayersFromFile(ifstream &ifs, players &_players);
 //Build the teams binding 2 players
