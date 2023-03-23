@@ -8,10 +8,8 @@
 #include <algorithm>
 #include <random>
 
-//Insert players on the list
-void insertPlayer(Player player, players &_players);
-//Insert teams on the list
-void insertTeam(Team team, teams &_teams);
+//set the number of rounds in Swiss
+int setNroundsSwiss(int n_players);
 //Reads the players information from a file
 void readPlayersFromFile(ifstream &ifs, players &_players);
 //Build the teams binding 2 players
@@ -21,12 +19,17 @@ void setTeamName(teams &_teams, int num_team, string _name);
 //create a function for outputting the teams on a file
 void writeTeamsOnFile(ofstream &ofs, teams &_teams);
 
-//Get the number of players from input (for test)
-int getNumPlayers();
-//Check if the number of players given in input is the same as the one specified in globals.h (for test)
-bool checkNumPlayers(players &_players);
 
-//shuffle function for simulating an extraction (of players and teams)
+//template functions
+
+//template function for inserting a player or a team on the list
+template<typename T, typename Container>
+void insertElem(T elem, Container &c)
+{
+    c.push_back(elem);
+}
+
+//shuffle template function for simulating an extraction (of players and teams)
 template<typename Container>
 void shuffleContainer(Container &c)
 {

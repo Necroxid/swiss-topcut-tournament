@@ -1,13 +1,28 @@
 #include "STC_setup.h"
 
-void insertPlayer(Player player, players &_players)
-{
-    _players.push_back(player);
-}
 
-void insertTeam(Team team, teams &_teams)
+/*//globals initialization
+
+//Total number of players
+const int N_PLAYERS = 16;
+//Total number of teams
+const int N_TEAMS_SWISS = (int)N_PLAYERS/2;
+//Number of rounds in Swiss
+const int N_ROUNDS_SWISS = ceil(log(N_PLAYERS));
+//Number of matches in Swiss
+const int N_MATCHES_SWISS = (N_TEAMS_SWISS/2)*N_ROUNDS_SWISS;
+//Number of teams in the topcut
+const int N_TEAMS_TOPCUT = 4;
+//Number of matches in the topcut
+const int N_MATCHES_TOPCUT = N_TEAMS_TOPCUT;
+//Total number of matches
+const int N_MATCHES_TOT = N_MATCHES_SWISS + N_MATCHES_TOPCUT;*/
+
+
+
+int setNroundsSwiss(int n_players)
 {
-    _teams.push_back(team);
+    return ceil(log(n_players));
 }
 
 void readPlayersFromFile(ifstream &ifs, players &_players)
@@ -22,7 +37,7 @@ void readPlayersFromFile(ifstream &ifs, players &_players)
         new_player.surname = _surname;
         new_player.team_name = _team_name;
         new_player.age = _age;
-        insertPlayer(new_player, _players);
+        insertElem(new_player, _players);
     }
 }
 
@@ -30,15 +45,15 @@ void readPlayersFromFile(ifstream &ifs, players &_players)
 //create and build teams
 void buildTeams(players &_players, teams &_teams)
 {
-    auto j=1;
+    auto j = 1;
     for(auto i=0; i<_players.size(); i+=2)
     {
         Team new_team;
         new_team.player1 = _players[i];
         new_team.player2 = _players[i+1];
-        new_team.name = "Squadra" + to_string(j);
-        insertTeam(new_team, _teams);
-        setTeamName(_teams, j-1, new_team.name);
+        //new_team.name = "Squadra" + to_string(j);
+        insertElem(new_team, _teams);
+        setTeamName(_teams, j-1, "Squadra" + to_string(j));
         j++;
     }
 }
@@ -53,20 +68,5 @@ void setTeamName(teams &_teams, int num_team, string _name)
 void writeTeamsOnFile(ofstream &ofs, teams &_teams)
 {
     for(auto i=0; i<_teams.size(); i++)
-    {
         ofs << _teams[i].name << ": " << _teams[i].player1.name << " " << _teams[i].player1.surname << ", " << _teams[i].player2.name << " " << _teams[i].player2.surname << endl;
-    }
-}
-
-int getNumPlayers()
-{
-    int t;
-    cin >> t;
-    return t;
-}
-
-bool checkNumPlayers(players &_players)
-{
-    auto input_numplayers = getNumPlayers();
-    return input_numplayers == _players.size() && input_numplayers == N_PLAYERS;
 }

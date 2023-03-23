@@ -1,8 +1,8 @@
 0.1 Tutorial Github ☑
 0.2 Tutorial CMake
 
-1. funzioni getter/setter per Player (nome_team) e Team (nome) + test
-2. riorganizzare funzioni in setup (h e cpp) togliendo da h quelle che vengono usate solo internamente + check compilazione
+1. funzioni getter/setter per Player (nome_team) e Team (nome) + test ☑
+2. riorganizzare funzioni in setup (h e cpp) togliendo da h quelle che vengono usate solo internamente + check compilazione ☑
 3. implementare algoritmo per la swiss + test. PER LA GESTIONE DEI ROUND USARE IL MENU (ciclo sul numero di round)
 3.5 Capire come gestire a runtime i vari round
 4. implementare algoritmo per la topcut + test

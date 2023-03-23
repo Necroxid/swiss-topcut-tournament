@@ -1,8 +1,6 @@
 #ifndef STC_DATA_H
 #define STC_DATA_H
 
-#include "globals/globals.h"
-
 #include <string>
 #include <vector>
 
@@ -12,8 +10,8 @@ using namespace std;
 struct Player{
     string name;
     string surname;
-    string team_name;
     int age;
+    string team_name;
 };
 
 //Team has a name, the two players forming it, the number of wins and the goal difference

@@ -30,5 +30,4 @@ int main()
     ofstream ofs("../txt/teams_test.txt");
     writeTeamsOnFile(ofs, _teams);
     ofs.close();
-
 }
