@@ -11,15 +11,15 @@
 //Insert players on the list
 void insertPlayer(Player player, players &_players);
 //Insert teams on the list
-void insertTeam(Team team, teams &_teams); //vedere se serve, magari traformarlo in output stream
+void insertTeam(Team team, teams &_teams);
 //Reads the players information from a file
 void readPlayersFromFile(ifstream &ifs, players &_players);
 //Build the teams binding 2 players
 void buildTeams(players &_players, teams &_teams);
-//void readTeamsFromFile(ifstream &ifs, teams &_teams, players _players);
-
 //set the name of a team
 void setTeamName(teams &_teams, int num_team, string _name);
+//create a function for outputting the teams on a file
+void writeTeamsOnFile(ofstream &ofs, teams &_teams);
 
 //Get the number of players from input (for test)
 int getNumPlayers();
