@@ -3,6 +3,7 @@
 
 1. funzioni getter/setter per Player (nome_team) e Team (nome) + test ☑
 2. riorganizzare funzioni in setup (h e cpp) togliendo da h quelle che vengono usate solo internamente + check compilazione ☑
+2.5 vedere iniziatori del num giocatori, team, round, match. Vedere dove mettere le funzioni di riordino. Funzione che abbina i match
 3. implementare algoritmo per la swiss + test. PER LA GESTIONE DEI ROUND USARE IL MENU (ciclo sul numero di round)
 3.5 Capire come gestire a runtime i vari round
 4. implementare algoritmo per la topcut + test
