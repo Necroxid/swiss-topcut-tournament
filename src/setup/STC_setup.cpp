@@ -61,7 +61,7 @@ void writeTeamsOnFile(ofstream &ofs, teams &_teams)
     for(auto i=0; i<_teams.size(); i++)
     {
         ofs << _teams[i].name << ": " << _teams[i].player1.name << " " << _teams[i].player1.surname << ", " << _teams[i].player2.name << " " << _teams[i].player2.surname;
-        if(i != _teams.size()-1)
+        if(i < _teams.size()-1)
             ofs << endl;
     }
 }
