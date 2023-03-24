@@ -28,8 +28,8 @@ struct Match{
     int table;
     Team team1;
     Team team2;
-    int goal1;
-    int goal2;
+    int score1;
+    int score2;
     int round;
 };
 

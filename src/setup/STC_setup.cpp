@@ -41,6 +41,8 @@ void buildTeams(players &_players, teams &_teams)
         Team new_team;
         new_team.player1 = _players[i];
         new_team.player2 = _players[i+1];
+        new_team.gd = 0;
+        new_team.wins = 0;
         insertElem(new_team, _teams);
         setTeamName(_teams, j-1, "Squadra" + to_string(j));
         j++;
@@ -62,4 +64,26 @@ void writeTeamsOnFile(ofstream &ofs, teams &_teams)
         if(i != _teams.size()-1)
             ofs << endl;
     }
+}
+
+void insertMatchResults(matches &_matches, teams &_teams, int num_match, int _score1, int _score2)
+{
+    //insert match results and update team wins and goal difference
+    _matches[num_match].score1 = _score1;
+    _matches[num_match].score2 = _score2;
+    _matches[num_match].team1.wins += (_score1 > _score2) ? 1 : 0;
+    _matches[num_match].team2.wins += (_score1 < _score2) ? 1 : 0;
+    _matches[num_match].team1.gd += _score1 - _score2;
+    _matches[num_match].team2.gd += _score2 - _score1;
+    //update team list with the new values, find the team in the list and update it
+    auto it1 = find_if(_teams.begin(), _teams.end(), [&_matches, num_match](Team t) -> bool {return t.name == _matches[num_match].team1.name;});
+    auto it2 = find_if(_teams.begin(), _teams.end(), [&_matches, num_match](Team t) -> bool {return t.name == _matches[num_match].team2.name;});
+    *it1 = _matches[num_match].team1;
+    *it2 = _matches[num_match].team2;
+}
+
+//sort teams by number of wins and in case of equality by goal difference
+void sortTeams(teams &_teams)
+{
+    sort(_teams.begin(), _teams.end(), [](Team a, Team b) -> bool {return (a.wins > b.wins) ? true : (a.wins == b.wins) ? (a.gd > b.gd) : false;});
 }

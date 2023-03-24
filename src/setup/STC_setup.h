@@ -16,7 +16,10 @@ void buildTeams(players &_players, teams &_teams);
 void setTeamName(teams &_teams, int num_team, string _name);
 //create a function for outputting the teams on a file
 void writeTeamsOnFile(ofstream &ofs, teams &_teams);
-
+//insert match results
+void insertMatchResults(matches &_matches, teams &_teams, int num_match, int _score1, int _score2);
+//sort teams by wins and goal difference
+void sortTeams(teams &_teams);
 
 //template functions
 
