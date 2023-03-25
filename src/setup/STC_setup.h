@@ -9,13 +9,13 @@
 #include <random>
 
 //Reads the players information from a file
-void readPlayersFromFile(ifstream &ifs, players &_players);
+void readPlayersFromFile(std::ifstream &ifs, players &_players);
 //Build the teams binding 2 players
 void buildTeams(players &_players, teams &_teams);
 //set the name of a team
-void setTeamName(teams &_teams, int num_team, string _name);
+void setTeamName(teams &_teams, int num_team, std::string _name);
 //create a function for outputting the teams on a file
-void writeTeamsOnFile(ofstream &ofs, teams &_teams);
+void writeTeamsOnFile(std::ofstream &ofs, teams &_teams);
 //insert match results
 void insertMatchResults(matches &_matches, teams &_teams, int num_match, int _score1, int _score2);
 //sort teams by wins and goal difference
@@ -34,7 +34,7 @@ void insertElem(T elem, Container &c)
 template<typename Container>
 void shuffleContainer(Container &c)
 {
-    random_device rd;
+    std::random_device rd;
     shuffle(c.begin(), c.end(), rd);
 }//da fare solo all'inizio
 

@@ -4,19 +4,17 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 //Player has a name, a surname, the team's name they belong to and an age
 struct Player{
-    string name;
-    string surname;
+    std::string name;
+    std::string surname;
     int age;
-    string team_name;
+    std::string team_name;
 };
 
 //Team has a name, the two players forming it, the number of wins and the goal difference
 struct Team{
-    string name;
+    std::string name;
     Player player1;
     Player player2;
     int wins;
@@ -33,8 +31,8 @@ struct Match{
     int round;
 };
 
-typedef vector<Player> players; //The list of players
-typedef vector<Team> teams; //The list of teams
-typedef vector<Match> matches; //The list of matches
+typedef std::vector<Player> players; //The list of players
+typedef std::vector<Team> teams; //The list of teams
+typedef std::vector<Match> matches; //The list of matches
 
 #endif
