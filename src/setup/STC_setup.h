@@ -17,7 +17,7 @@ void setTeamName(teams &_teams, int num_team, std::string _name);
 //create a function for outputting the teams on a file
 void writeTeamsOnFile(std::ofstream &ofs, teams &_teams);
 //insert match results
-void insertMatchResults(matches &_matches, teams &_teams, int num_match, int _score1, int _score2);
+void insertMatchResults(matches &_matches, teams &_teams, int num_match, int num_rounds, int _score1, int _score2);
 //sort teams by wins and goal difference
 void sortTeams(teams &_teams);
 
@@ -27,7 +27,7 @@ void sortTeams(teams &_teams);
 template<typename T, typename Container>
 void insertElem(T elem, Container &c)
 {
-    c.push_back(elem);
+    c.emplace_back(elem);
 }
 
 //shuffle template function for simulating an extraction (of players and teams)

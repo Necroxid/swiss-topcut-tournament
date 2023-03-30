@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 
 //Player has a name, a surname, the team's name they belong to and an age
 struct Player{
@@ -17,8 +18,13 @@ struct Team{
     std::string name;
     Player player1;
     Player player2;
-    int wins;
     int gd; //goal difference
+    int wins;
+    double win_percentage;
+    std::vector<double> opp_win_percentage;
+    double opp_win_percentage_avg;
+    std::vector<double> opp_opp_win_percentage;
+    double opp_opp_win_percentage_avg;
 };
 
 //Match has the table the match is playing at, the two teams battling each other, the goals made by them and the round the match is playing on
@@ -34,5 +40,6 @@ struct Match{
 typedef std::vector<Player> players; //The list of players
 typedef std::vector<Team> teams; //The list of teams
 typedef std::vector<Match> matches; //The list of matches
+typedef std::vector<std::pair<Team, Team>> pairings_list; //The list of pairings
 
 #endif
