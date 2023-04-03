@@ -5,17 +5,20 @@
 
 #include <fstream>
 #include <iostream>
-#include <algorithm>
 #include <random>
 
-//Reads the players information from a file
+//Read the players information from a file
 void readPlayersFromFile(std::ifstream &ifs, players &_players);
 //Build the teams binding 2 players
 void buildTeams(players &_players, teams &_teams);
 //set the name of a team
 void setTeamName(teams &_teams, int num_team, std::string _name);
-//create a function for outputting the teams on a file
+//Output the teams on a file
 void writeTeamsOnFile(std::ofstream &ofs, teams &_teams);
+//list the members of a team
+void team_members(teams &_teams, int n_team);
+//create a new match between the team i and the team j
+void newMatch(teams &_teams, matches &_matches, int i, int j);
 //insert match results
 void insertMatchResults(matches &_matches, teams &_teams, int num_match, int num_rounds, int _score1, int _score2);
 //sort teams by wins and goal difference
@@ -35,7 +38,7 @@ template<typename Container>
 void shuffleContainer(Container &c)
 {
     std::random_device rd;
-    shuffle(c.begin(), c.end(), rd);
+    std::shuffle(c.begin(), c.end(), rd);
 }//da fare solo all'inizio
 
 #endif

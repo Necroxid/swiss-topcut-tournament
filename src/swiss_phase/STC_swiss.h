@@ -3,13 +3,12 @@
 
 #include "../setup/STC_setup.h"
 
-//set the number of rounds in Swiss
-int setNroundsSwiss(int n_teams);
-//set the number of matches in Swiss
-int setNmatchesSwiss(int n_players);
-//implement swiss algorithm with pairings, based on the number of wins and goal difference
-void bindMatches(teams &_teams, matches &_matches);
-//implement swiss algorithm with pairings, based on the number of wins and goal difference and rematch as last resort
-void bindMatches_rematchLR(teams &_teams, matches &_matches);
-
+namespace Swiss {
+    //set the number of rounds in Swiss
+    int setNrounds(int n_teams);
+    //set the number of matches in Swiss
+    int setNmatches(int n_players);
+    //implement swiss algorithm with pairings, based on the number of wins and goal difference (rematch allowed)
+    void bindMatches(teams &_teams, matches &_matches);
+}
 #endif

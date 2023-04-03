@@ -1,5 +1,6 @@
 #include "STC_setup.h"
 
+#include <algorithm>
 
 /*
 //globals initialization
@@ -74,6 +75,19 @@ void writeTeamsOnFile(std::ofstream &ofs, teams &_teams)
     }
 }
 
+void team_members(teams &_teams, int n_team)
+{
+    std::cout << _teams[n_team].name << ": " << _teams[n_team].player1.name << " " << _teams[n_team].player1.surname << ", " << _teams[n_team].player2.name << " " << _teams[n_team].player2.surname << std::endl;
+}
+
+void newMatch(teams &_teams, matches &_matches, int i, int j)
+{
+    Match new_match;
+    new_match.team1 = _teams[i];
+    new_match.team2 = _teams[j];
+    insertElem(new_match, _matches);
+}
+
 double calc_avg(std::vector<double> _opp_win_percentage)
 {
     double sum = 0;
@@ -114,17 +128,6 @@ void insertMatchResults(matches &_matches, teams &_teams, int num_match, int num
 }
 
 //sort teams by number of wins and in case of equality by goal difference and in case of equality by opponent's win percentage and in case of equality by opponent's opponent's win percentage
-/*void sortTeams(teams &_teams)
-{
-    std::sort(_teams.begin(), _teams.end(), [](Team a, Team b) ->
-    bool {return (a.wins > b.wins) ? true :
-                 (a.wins == b.wins) ? (a.gd > b.gd) ? true :
-                                      (a.gd == b.gd) ? (round(a.opp_win_percentage_avg * 100.0)/100.0 > round(b.opp_win_percentage_avg * 100.0)/100.0) ? true :
-                                                       (round(a.opp_win_percentage_avg * 100.0)/100.0 == round(b.opp_win_percentage_avg * 100.0)/100.0) ? (round(a.opp_opp_win_percentage_avg * 100.0)/100.0 > round(b.opp_opp_win_percentage_avg * 100.0)/100.0) ? true :
-                                                                                                                                                          false : false : false : false;});
-}*/
-
-//sort teams by number of wins and in case of equality by goal difference and in case of equality by opponent's win percentage and in case of equality by opponent's opponent's win percentage
 void sortTeams(teams &_teams)
 {
     std::sort(_teams.begin(), _teams.end(), [](Team a, Team b) -> bool {
@@ -137,27 +140,33 @@ void sortTeams(teams &_teams)
             return true;
         else if(a.wins < b.wins)
             return false;
-
+        //case a.wins == b.wins
         if(a.gd > b.gd)
             return true;
         else if(a.gd < b.gd)
             return false;
-
+        //case a.gd == b.gd
         if(A_opp_win_rounded > B_opp_win_rounded)
             return true;
         else if(A_opp_win_rounded < B_opp_win_rounded)
             return false;
-
+        //case A_opp_win_rounded == B_opp_win_rounded
         if(A_opp_opp_win_rounded > B_opp_opp_win_rounded)
             return true;
         else if(A_opp_opp_win_rounded < B_opp_opp_win_rounded)
             return false;
-
+        //case A_opp_opp_win_rounded == B_opp_opp_win_rounded
         return false;
     });
 }
-/*//sort teams by number of wins and in case of equality by goal difference and in case of equality by opponent's win percentage and in case of equality by opponent's opponent's win percentage
-void sortTeams(teams &_teams)
+
+//sort teams by number of wins and in case of equality by goal difference and in case of equality by opponent's win percentage and in case of equality by opponent's opponent's win percentage
+/*void sortTeams(teams &_teams)
 {
-    std::sort(_teams.begin(), _teams.end(), [](Team a, Team b) -> bool {return (a.wins > b.wins) ? true : (a.wins == b.wins) ? (a.gd > b.gd) : false;});
+    std::sort(_teams.begin(), _teams.end(), [](Team a, Team b) ->
+    bool {return (a.wins > b.wins) ? true :
+                 (a.wins == b.wins) ? (a.gd > b.gd) ? true :
+                                      (a.gd == b.gd) ? (round(a.opp_win_percentage_avg * 100.0)/100.0 > round(b.opp_win_percentage_avg * 100.0)/100.0) ? true :
+                                                       (round(a.opp_win_percentage_avg * 100.0)/100.0 == round(b.opp_win_percentage_avg * 100.0)/100.0) ? (round(a.opp_opp_win_percentage_avg * 100.0)/100.0 > round(b.opp_opp_win_percentage_avg * 100.0)/100.0) ? true :
+                                                                                                                                                          false : false : false : false;});
 }*/

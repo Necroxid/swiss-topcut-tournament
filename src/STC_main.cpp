@@ -1,9 +1,10 @@
+#include "STC_menu.h"
+#include "swiss_phase/STC_swiss.h"
+#include "topcut_phase/STC_topcut.h"
+
 #include <ctime>
 #include <cstdlib>
 #include <iomanip>
-
-#include "swiss_phase/STC_swiss.h"
-#include "topcut_phase/STC_topcut.h"
 
 /*const auto N_PLAYERS = []() -> auto {
                      int t;
@@ -15,7 +16,8 @@
 int main()
 {
     srand(time(NULL));
-
+    std::cout << "\nWelcome to the Table Football Tournament!\n";
+    printLine();
     players _players;
     teams _teams;
     matches _matches;
@@ -34,7 +36,7 @@ int main()
     ofs.close();
 
     auto teams_size = _teams.size();
-    auto n_rounds = setNroundsSwiss(teams_size);
+    auto n_rounds = Swiss::setNrounds(teams_size);
     auto n_matches_per_round = teams_size/2;
 
     std::cout << std::setprecision(4);
@@ -43,7 +45,7 @@ int main()
     //test for bindMatches and simulate the matches
     for(auto i=0; i<n_rounds; i++)
     {
-        bindMatches(_teams, _matches);
+        Swiss::bindMatches(_teams, _matches);
         std::cout << "Chart pre-round " << i+1 << std::endl;
         for(auto j=0; j<teams_size; j++)
         {
@@ -60,7 +62,9 @@ int main()
             auto losses1 = i+1 - _matches[j].team1.wins;
             auto losses2 = i+1 - _matches[j].team2.wins;
             if(j==0) std::cout << std::endl;
-            std::cout << _matches[j].team1.name << " (" << _matches[j].team1.wins << "-" << losses1 << ", gd: " << _matches[j].team1.gd << ", win%: " << _matches[j].team1.win_percentage << "%, opp_win%: " << _matches[j].team1.opp_win_percentage_avg << "%, opp_opp_win%: " << _matches[j].team1.opp_opp_win_percentage_avg << "%) " << _matches[j].score1 << " - " << _matches[j].score2 << " " << _matches[j].team2.name << " (" << _matches[j].team2.wins << "-" << losses2 << ", gd: " << _matches[j].team2.gd << ", win%: " << _matches[j].team2.win_percentage << "%, opp_win%: " << _matches[j].team2.opp_win_percentage_avg  << "%, opp_opp_win%: " << _matches[j].team2.opp_opp_win_percentage_avg<< "%)" << std::endl;
+            std::cout << _matches[j].team1.name << " (" << _matches[j].team1.wins << "-" << losses1 << ", gd: " << _matches[j].team1.gd << ", win%: " << _matches[j].team1.win_percentage << "%, opp_win%: " << _matches[j].team1.opp_win_percentage_avg << "%, opp_opp_win%: " << _matches[j].team1.opp_opp_win_percentage_avg << "%) ";
+            std::cout << _matches[j].score1 << " - " << _matches[j].score2 << " ";
+            std::cout << _matches[j].team2.name << " (" << _matches[j].team2.wins << "-" << losses2 << ", gd: " << _matches[j].team2.gd << ", win%: " << _matches[j].team2.win_percentage << "%, opp_win%: " << _matches[j].team2.opp_win_percentage_avg  << "%, opp_opp_win%: " << _matches[j].team2.opp_opp_win_percentage_avg<< "%)" << std::endl;
         }
         if(i < n_rounds-1) std::cout << std::endl;
         sortTeams(_teams);
